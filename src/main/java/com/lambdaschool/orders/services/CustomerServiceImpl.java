@@ -2,6 +2,7 @@ package com.lambdaschool.orders.services;
 
 import com.lambdaschool.orders.models.Customer;
 import com.lambdaschool.orders.repositories.CustomersRepository;
+import com.lambdaschool.orders.views.OrderCounts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,5 +34,15 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer findCustomerById(long id) {
         return customerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Customer with id '" + id + "' NOT FOUND"));
+    }
+
+    @Override
+    public List<Customer> findByCustomerNameLike(String namelike) {
+        return customerRepository.findByCustnameContainingIgnoringCase(namelike);
+    }
+
+    @Override
+    public List<OrderCounts> findOrderCounts() {
+        return customerRepository.findOrderCounts();
     }
 }
