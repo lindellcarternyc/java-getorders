@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
 
 @Transactional
 @Service(value = "orderService")
@@ -24,5 +25,10 @@ public class OrderServiceImpl implements OrderService {
     public Order findOrderById(long id) {
         return orderRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Order with id '" + id + "' NOT FOUND"));
+    }
+
+    @Override
+    public List<Order> findOrdersWithAdvanceAmounts() {
+        return orderRepository.findOrdersByAdvanceamountAbove0();
     }
 }
