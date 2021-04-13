@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/customers")
 public class CustomersController {
     @Autowired
-    CustomerService customerService;
+    private CustomerService customerService;
 
     // http://localhost:2019/customers/orders
     @GetMapping(value = "/orders", produces = "application/json")
