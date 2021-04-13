@@ -1,5 +1,7 @@
 package com.lambdaschool.orders.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,18 +25,11 @@ public class Agent {
     private String workingarea;
 
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnoreProperties(value = "agent", allowSetters = true)
     private Set<Customer> customers = new HashSet<>();
 
     public Agent() {
     }
-
-//    public Agent(String agentname, double commission, String country, String phone, String workingarea) {
-//        this.agentname = agentname;
-//        this.commission = commission;
-//        this.country = country;
-//        this.phone = phone;
-//        this.workingarea = workingarea;
-//    }
 
     public Agent(String agentname, String country, double commission, String phone, String workingarea) {
         this.agentname = agentname;
